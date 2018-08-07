@@ -1,7 +1,29 @@
 require 'test_helper'
 
 class CoinTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  
+  def setup
+    @coin = create(:coin)
+    @coins = create_list(:coin, 25)
+  end
+
+  def test_coin_is_valid
+    assert @coin.valid?
+  end
+  
+  def test_coins_ve_same_root
+   root_uuids =  @coins.pluck(:root_uuid)
+   assert root_uuids.compact.length, 1
+  end 
+
+  def test_coins_ve_different_uuid
+   uuids = @coins.pluck(:uuid)
+   assert uuids.length, uuids.uniq.length
+  end
+
+  def test_coins_ve_different_md5
+   mds = @coins.pluck(:md5)
+   assert mds.length, mds.uniq.length
+  end
+
 end

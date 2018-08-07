@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :coin do
-    root_uuid "MyString"
-    uuid "MyString"
-    md5 "MyString"
-    spent "MyString"
+    root_uuid nil
+    uuid nil
+    md5 nil
+    spent false
   end
 end
