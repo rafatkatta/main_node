@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_07_175036) do
+ActiveRecord::Schema.define(version: 2018_08_07_194033) do
+
+  create_table "coin_checks", force: :cascade do |t|
+    t.string "md5"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["md5"], name: "index_coin_checks_on_md5", unique: true
+  end
 
   create_table "coins", force: :cascade do |t|
     t.string "root_uuid", null: false

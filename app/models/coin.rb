@@ -1,6 +1,6 @@
 class Coin < ApplicationRecord
   before_save :uuids_and_md5_check
-
+  after_save :create_coin_check
 
   private
 
@@ -20,4 +20,7 @@ class Coin < ApplicationRecord
     end
   end
 
+  def create_coin_check
+    CoinCheck.create!(md5: self.md5)
+  end
 end
