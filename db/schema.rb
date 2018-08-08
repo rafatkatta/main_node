@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_07_194033) do
+ActiveRecord::Schema.define(version: 2018_08_07_200323) do
+
+  create_table "clients", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "domain", null: false
+    t.string "ipv4"
+    t.string "ipv6"
+    t.string "uuid", null: false
+    t.string "secret_key"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["uuid"], name: "index_clients_on_uuid", unique: true
+  end
 
   create_table "coin_checks", force: :cascade do |t|
     t.string "md5"
