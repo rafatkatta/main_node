@@ -1,4 +1,6 @@
 class Client < ApplicationRecord
+ has_many :orders 
+
  domain_regex = /\A#{URI::regexp}\z/
  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
  validates :domain, format: { with: domain_regex }

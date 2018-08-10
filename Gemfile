@@ -30,6 +30,12 @@ gem 'bootsnap', '>= 1.1.0', require: false
 # Use uuid
 gem 'uuid', '~> 2.3', '>= 2.3.9'
 
+#gem "active_record_bulk_insert"
+gem "active_record_bulk_insert"
+
+#gem 'rbzip2', '~> 0.3.0'
+gem 'rbzip2', '~> 0.3.0'
+
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 

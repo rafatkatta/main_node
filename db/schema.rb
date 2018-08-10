@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_07_200323) do
+ActiveRecord::Schema.define(version: 2018_08_08_094752) do
 
   create_table "clients", force: :cascade do |t|
     t.string "email", null: false
@@ -40,6 +40,18 @@ ActiveRecord::Schema.define(version: 2018_08_07_200323) do
     t.datetime "updated_at", null: false
     t.index ["md5"], name: "index_coins_on_md5", unique: true
     t.index ["uuid"], name: "index_coins_on_uuid", unique: true
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.float "amount_edin"
+    t.float "price_euro"
+    t.float "total_euro"
+    t.string "oid"
+    t.boolean "closed", default: false
+    t.integer "client_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_orders_on_client_id"
   end
 
 end

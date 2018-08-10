@@ -13,7 +13,7 @@ class CoinTest < ActiveSupport::TestCase
   
   def test_coins_ve_same_root
    root_uuids =  @coins.pluck(:root_uuid)
-   assert root_uuids.compact.length, 1
+   assert root_uuids.uniq.length, 1
   end 
 
   def test_coins_ve_different_uuid
