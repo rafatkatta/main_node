@@ -5,7 +5,7 @@ namespace :coins do
   
   task generate: :environment do
    # 10000 Euro
-   euros = 100
+   euros = 10000
    dinars = euros * 10
    @root_uuid = get_root_uuid
 
@@ -13,6 +13,7 @@ namespace :coins do
      @coins = generate_coins(100)
      Coin.bulk_insert(@coins)
    end
+
    md5_check_file 
   end
 
@@ -28,7 +29,7 @@ private
 
   def generate
     uuid = Digest::SHA1.hexdigest([Time.now, rand].join) 
-    md5  = Digest::MD5.hexdigest("#{uuid}_#{@root_uuid}") 
+    md5  = Digest::SHA1.hexdigest("#{uuid}_#{@root_uuid}") 
    {root_uuid: @root_uuid, uuid: uuid, md5: md5, spent: false}
   end
 
