@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ClientsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @client = clients(:one)
+    @client = create(:client)
   end
 
   test "should get index" do
@@ -12,7 +12,7 @@ class ClientsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create client" do
     assert_difference('Client.count') do
-      post clients_url, params: { client: { domain: @client.domain, email: @client.email, ipv4: @client.ipv4, ipv6: @client.ipv6, pub_key: @client.pub_key, uuid: @client.uuid } }, as: :json
+      post clients_url, params: { client: { domain: @client.domain, email: @client.email, ipv4: @client.ipv4, ipv6: @client.ipv6, secret_key: @client.secret_key } }, as: :json
     end
 
     assert_response 201
@@ -24,7 +24,7 @@ class ClientsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update client" do
-    patch client_url(@client), params: { client: { domain: @client.domain, email: @client.email, ipv4: @client.ipv4, ipv6: @client.ipv6, pub_key: @client.pub_key, uuid: @client.uuid } }, as: :json
+    patch client_url(@client), params: { client: { domain: @client.domain, email: @client.email, ipv4: @client.ipv4, ipv6: @client.ipv6, secret_key: @client.secret_key, uuid: @client.uuid } }, as: :json
     assert_response 200
   end
 

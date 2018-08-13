@@ -24,18 +24,14 @@ class CoinsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /coins/1
-  def update
-    if @coin.update(coin_params)
+  # CHECK /coins/1
+  def check
+    @coin = Coin.where(root_uuid: coin_params[:root_uuid], uuid: coin_params[:uuid])
+    if @coin
       render json: @coin
     else
       render json: @coin.errors, status: :unprocessable_entity
     end
-  end
-
-  # DELETE /coins/1
-  def destroy
-    @coin.destroy
   end
 
   private
@@ -46,6 +42,6 @@ class CoinsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def coin_params
-      params.require(:coin).permit(:root_uuid, :uuid, :md5, :spent)
+      params.require(:coin).permit(:root_uuid, :uuid) 
     end
 end
