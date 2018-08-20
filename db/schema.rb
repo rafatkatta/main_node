@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_08_094752) do
+ActiveRecord::Schema.define(version: 2018_08_20_182749) do
 
   create_table "clients", force: :cascade do |t|
     t.string "email", null: false
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2018_08_08_094752) do
     t.string "secret_key"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "active", default: true
     t.index ["uuid"], name: "index_clients_on_uuid", unique: true
   end
 

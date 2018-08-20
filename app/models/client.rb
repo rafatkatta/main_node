@@ -9,9 +9,17 @@ class Client < ApplicationRecord
 
  before_save :uuid_and_secret_key
 
+ before_destroy do
+   throw :abort if self.active? || self.orders.count > 0
+ end
+
  def connection_info
   self.domain || self.ipv4 || self.ipv6 
  end  
+
+ def active?
+  self.active
+ end
 
  private
 
@@ -30,4 +38,5 @@ class Client < ApplicationRecord
  def ipv6_valid?
    IPAddr.new(self.ipv6).ipv6? unless self.ipv6.nil?
  end
+
 end

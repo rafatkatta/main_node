@@ -26,7 +26,7 @@ class ClientsController < ApplicationController
 
   # PATCH/PUT /clients/1
   def update
-    if @client.update(client_params)
+    if !check_client.nil? && @client.update(client_params)
       render json: @client
     else
       render json: @client.errors, status: :unprocessable_entity
@@ -34,10 +34,13 @@ class ClientsController < ApplicationController
   end
 
   # DELETE /clients/1
-  def destroy
-    @client.destroy
+  def destroy 
+    unless @client.active? 
+      @client.destroy
+    end
   end
 
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_client
@@ -46,6 +49,10 @@ class ClientsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def client_params
-      params.require(:client).permit(:email, :domain, :ipv4, :ipv6, :uuid, :pub_key)
+      params.require(:client).permit(:email, :domain, :ipv4, :ipv6, :uuid, :secret_key)
+    end
+    
+    def check_client
+     Client.find_by_secret_key(params[:client][:secret_key])
     end
 end

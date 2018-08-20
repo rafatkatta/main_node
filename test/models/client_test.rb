@@ -37,4 +37,23 @@ class ClientTest < ActiveSupport::TestCase
     @client.save!
     assert_equal @client.connection_info, @client.domain
   end
+ 
+ def test_active_client_cannot_be_destroyed
+   assert @client.active?
+   assert !@client.destroy
+ end
+
+ def test_destroy_not_active_client
+   @client.active = false
+   @client.save!
+   assert @client.destroy
+ end
+
+ def test_cannot_destroy_active_client_with_orders
+   @order =create(:order,client: @client)
+   @client.update_attribute(:active,false)
+   assert !@client.destroy
+   @order.destroy
+   assert @client.destroy
+ end 
 end
