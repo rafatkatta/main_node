@@ -16,4 +16,11 @@ class OrderTest < ActiveSupport::TestCase
    oids = @client.orders.pluck(:oid)
    assert_equal oids.length, oids.uniq.length
   end
+
+  def test_order_delete_if_closed
+    order = create(:order, client: @client)
+    order.closed = true
+    order.save!
+    order.destroy!
+  end 
 end

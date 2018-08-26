@@ -14,12 +14,16 @@ class ClientsControllerTest < ActionDispatch::IntegrationTest
     assert_difference('Client.count') do
       post clients_url, params: { client: { domain: @client.domain, email: @client.email, ipv4: @client.ipv4, ipv6: @client.ipv6, secret_key: @client.secret_key } }, as: :json
     end
-
     assert_response 201
   end
 
-  test "should show client" do
+  test "should show client with id" do
     get client_url(@client), as: :json
+    assert_response :success
+  end
+
+  test "should show client with uuid" do
+    get client_url(@client.uuid), as: :json
     assert_response :success
   end
 

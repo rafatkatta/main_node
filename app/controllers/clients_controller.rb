@@ -44,7 +44,11 @@ class ClientsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_client
-      @client = Client.find(params[:id])
+      if params[:id].include? '-'
+        @client = Client.where(uuid: params[:id])
+      else
+        @client = Client.find(params[:id])
+      end
     end
 
     # Only allow a trusted parameter "white list" through.

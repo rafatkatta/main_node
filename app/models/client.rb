@@ -10,7 +10,11 @@ class Client < ApplicationRecord
  before_save :uuid_and_secret_key
 
  before_destroy do
-   throw :abort if self.active? || self.orders.count > 0
+   if self.active? || self.orders.count > 0
+     throw(:abort) 
+   else
+     true
+   end
  end
 
  def connection_info

@@ -2,6 +2,18 @@ class Order < ApplicationRecord
   belongs_to :client
   before_save :order_id
 
+  before_destroy do
+    unless self.closed?
+      throw(:abort)
+    else
+      true
+    end 
+  end
+
+  def closed?
+    self.closed
+  end  
+
 private
 
  def order_id

@@ -50,7 +50,7 @@ class ClientTest < ActiveSupport::TestCase
  end
 
  def test_cannot_destroy_active_client_with_orders
-   @order =create(:order,client: @client)
+   @order =create(:order,closed: true,client: @client)
    @client.update_attribute(:active,false)
    assert !@client.destroy
    @order.destroy
